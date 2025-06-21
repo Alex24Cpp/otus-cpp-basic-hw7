@@ -79,42 +79,42 @@ TEST(List, Insert) {  // вставка элементов в середину
 	ASSERT_EQ(list.size(), expectedSize);
 }
 
-TEST(List, PopBack) {    // удаление элементов из конца
-    // Arrange 
-    const size_t count = 10;
-    ListTypeContainer::MyListTypeContainer<int> list;
+TEST(List, PopBack) {  // удаление элементов из конца
+	// Arrange
+	const size_t count = 10;
+	ListTypeContainer::MyListTypeContainer<int> list;
 
-    for (size_t i = 0; i < count; ++i) {
-        list.push_back(i);
-    }
+	for (size_t i = 0; i < count; ++i) {
+		list.push_back(i);
+	}
 
-    // Act
-    for (size_t i = 0; i < count; ++i) {
-        list.pop_back();
-    }
+	// Act
+	for (size_t i = 0; i < count; ++i) {
+		list.pop_back();
+	}
 
-    // Assert
-    ASSERT_EQ(list.size(), static_cast<size_t>(0));
-    ASSERT_TRUE(list.empty());
+	// Assert
+	ASSERT_EQ(list.size(), static_cast<size_t>(0));
+	ASSERT_TRUE(list.empty());
 }
 
-TEST(List, PopFront) { // удаление элементов из начала
-    // Arrange
-    const size_t count = 10;
-    ListTypeContainer::MyListTypeContainer<size_t> list;
+TEST(List, PopFront) {  // удаление элементов из начала
+	// Arrange
+	const size_t count = 10;
+	ListTypeContainer::MyListTypeContainer<size_t> list;
 
-    for (size_t i = 0; i < count; ++i) {
-        list.push_front(i); // push_back
-    }
+	for (size_t i = 0; i < count; ++i) {
+		list.push_front(i);  // push_back
+	}
 
-    // Act
-    for (size_t i = 0; i < count; ++i) {
-        list.pop_front();   // pop_back
-    }
+	// Act
+	for (size_t i = 0; i < count; ++i) {
+		list.pop_front();  // pop_back
+	}
 
-    // Assert
-    ASSERT_EQ(list.size(), static_cast<size_t>(0));
-    ASSERT_TRUE(list.empty());
+	// Assert
+	ASSERT_EQ(list.size(), static_cast<size_t>(0));
+	ASSERT_TRUE(list.empty());
 }
 
 TEST(List, Erase) {  // удаление элементов из середины
@@ -145,7 +145,7 @@ TEST(List, Get) {  // получение элементов из контейн�
 	const size_t expectedSize = 10;
 	const size_t count = 10;
 	int testArray[count] = {0, 0, 0, 0, 0, 10, 0, 0, 0, 0};
-    size_t testIndex{5};
+	size_t testIndex{5};
 	int expectedValue{10};
 	ListTypeContainer::MyListTypeContainer<int> list;
 	for (size_t i = 0; i < count; ++i) {
@@ -155,17 +155,18 @@ TEST(List, Get) {  // получение элементов из контейн�
 	// Act
 	int getValue = list[testIndex];
 
-    // Assert
+	// Assert
 	ASSERT_EQ(getValue, expectedValue);
 	ASSERT_EQ(list.size(), expectedSize);
 }
 
-TEST(List, GetSize) {  // получение размера контейнера (фактическое количество элементов)
+TEST(List, GetSize) {  // получение размера контейнера (фактическое количество
+					   // элементов)
 	// Arrange
 	const size_t expectedSize = 10;
 	const size_t count = 10;
 	int testArray[count] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    size_t getSize{0};
+	size_t getSize{0};
 	ListTypeContainer::MyListTypeContainer<int> list;
 	for (size_t i = 0; i < count; ++i) {
 		list.push_back(testArray[i]);
@@ -173,10 +174,10 @@ TEST(List, GetSize) {  // получение размера контейнера
 
 	// Act
 	for (auto i = list.begin(); i != list.end(); ++i) {
-        ++getSize;
-    }
+		++getSize;
+	}
 
-    // Assert
+	// Assert
 	ASSERT_EQ(getSize, expectedSize);
 	ASSERT_EQ(list.size(), expectedSize);
 }

@@ -92,7 +92,7 @@ public:
 		insert(value, 0);
 	}
 	void pop_back() {
-		erase(m_size-1);
+		erase(m_size - 1);
 	}
 	void pop_front() {
 		erase(0);
