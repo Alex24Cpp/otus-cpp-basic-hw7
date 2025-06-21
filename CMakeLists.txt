@@ -8,16 +8,16 @@ find_package(GTest)
 # Main target
 add_executable(containers src/main.cpp)
 
-# # clang-format
-# find_program(CLANG-FORMAT_PATH NAMES clang-format REQUIRED)
-# message(STATUS "Найден clang-format: ${CLANG-FORMAT_PATH}")
-# file(GLOB_RECURSE CLANG-FORMAT_SRC CONFIGURE_DEPENDS *.*pp)
-# message(STATUS "Найдены src: ${CLANG-FORMAT_SRC}")
-# add_custom_target(clangformat
-#     COMMAND ${CLANG-FORMAT_PATH} -i ${CLANG-FORMAT_SRC}
-#     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-#     COMMENT "Форматирование ${PROJECT_NAME} с ${CLANG-FORMAT_PATH}"
-# )
+# clang-format
+find_program(CLANG-FORMAT_PATH NAMES clang-format REQUIRED)
+message(STATUS "Найден clang-format: ${CLANG-FORMAT_PATH}")
+file(GLOB_RECURSE CLANG-FORMAT_SRC CONFIGURE_DEPENDS *.*pp)
+message(STATUS "Найдены src: ${CLANG-FORMAT_SRC}")
+add_custom_target(clangformat
+    COMMAND ${CLANG-FORMAT_PATH} -i ${CLANG-FORMAT_SRC}
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    COMMENT "Форматирование ${PROJECT_NAME} с ${CLANG-FORMAT_PATH}"
+)
 # add_dependencies(containers clangformat)
 
 # Test target
@@ -53,11 +53,11 @@ target_compile_options(containers PRIVATE
     -Wextra
     -pedantic
     -Werror
-    -fsanitize=address # only for debug and test builds!
+    # -fsanitize=address # only for debug and test builds!
 )
-target_link_options(containers PRIVATE
-    -fsanitize=address
-)
+# target_link_options(containers PRIVATE
+#     -fsanitize=address
+# )
 
 target_compile_options(test_cont PRIVATE
     -Wall

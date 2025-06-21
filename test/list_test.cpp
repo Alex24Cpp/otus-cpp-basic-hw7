@@ -181,6 +181,28 @@ TEST(List, GetSize) {  // получение размера контейнера
 	ASSERT_EQ(list.size(), expectedSize);
 }
 
+TEST(List, Copy) {  // на копирование контейнера
+	// Arrange
+	const size_t count = 10;
+	bool result{false};
+	int testArray[count] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+	ListTypeContainer::MyListTypeContainer<int> list;
+	for (size_t i = 0; i < count; ++i) {
+		list.push_back(testArray[i]);
+	}
+
+	// Act
+	ListTypeContainer::MyListTypeContainer<int> listCopy(list);
+	for (size_t i = 0; i < list.size(); ++i) {
+		result += !(list[i] == listCopy[i]);
+	}
+
+	// Assert
+	ASSERT_TRUE(!result);
+	ASSERT_EQ(list.size(), listCopy.size());
+}
+
+
 int main(int argc, char** argv) {
 	testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();

@@ -180,3 +180,25 @@ TEST(Serial, GetSize) {  // получение размера контейнер
 	ASSERT_EQ(getSize, expectedSize);
 	ASSERT_EQ(list.size(), expectedSize);
 }
+
+TEST(Serial, Copy) {  // на копирование контейнера
+	// Arrange
+	const size_t count = 10;
+	bool result{false};
+	int testArray[count] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+	SerialContainer::MySerialContainer<int> list;
+	for (size_t i = 0; i < count; ++i) {
+		list.push_back(testArray[i]);
+	}
+
+	// Act
+	SerialContainer::MySerialContainer<int> listCopy(list);
+	for (size_t i = 0; i < list.size(); ++i) {
+		result += !(list[i] == listCopy[i]);
+	}
+
+	// Assert
+	ASSERT_TRUE(!result);
+	ASSERT_EQ(list.size(), listCopy.size());
+}
+
