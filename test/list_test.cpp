@@ -202,6 +202,27 @@ TEST(List, Copy) {  // на копирование контейнера
 	ASSERT_EQ(list.size(), listCopy.size());
 }
 
+TEST(List, Move) {  // на перемещение контейнера (вызов перемещающего оператора присваивания)
+	// Arrange
+	const size_t count = 10;
+	bool result{false};
+	int testArray[count] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+	ListTypeContainer::MyListTypeContainer<int> list;
+	for (size_t i = 0; i < count; ++i) {
+		list.push_back(testArray[i]);
+	}
+
+	// Act
+	ListTypeContainer::MyListTypeContainer<int> listMove;
+    listMove = std::move(list);
+	for (size_t i = 0; i < listMove.size(); ++i) {
+		result += !(testArray[i] == listMove[i]);
+	}
+
+	// Assert
+	ASSERT_TRUE(!result);
+	ASSERT_EQ(list.size(), static_cast<size_t>(0));
+}
 
 int main(int argc, char** argv) {
 	testing::InitGoogleTest(&argc, argv);
