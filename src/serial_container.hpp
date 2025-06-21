@@ -91,6 +91,13 @@ public:
 	void push_front(T value) {
 		insert(value, 0);
 	}
+	void pop_back() {
+		erase(m_size-1);
+	}
+	void pop_front() {
+		erase(0);
+	}
+
 	int insert(T value, size_t n) {
 		if (n > m_size) {  // проверка на вставку без разрыва
 			return -1;
@@ -125,18 +132,23 @@ public:
 		m_size -= (last - first) + 1;
 		return 0;
 	}
+
 	int erase(size_t index) {
 		return erase(index, index);
 	}
+
 	size_t size() const {
 		return m_size;
 	}
+
 	T operator[](size_t n) const {
 		return m_container[n];
 	}
+
 	size_t capacity() const {
 		return m_capacity;
 	}
+
 	void clear() {
 		m_size = 0;
 	}

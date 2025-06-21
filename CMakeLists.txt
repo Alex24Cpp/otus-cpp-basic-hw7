@@ -21,12 +21,12 @@ add_executable(containers src/main.cpp)
 # add_dependencies(containers clangformat)
 
 # Test target
-add_executable(list_test test/list_test.cpp
+add_executable(test_cont test/list_test.cpp test/serial_test.cpp 
 )
 
 # Add src to the include directories for the test target
 target_include_directories(
-    list_test PRIVATE
+    test_cont PRIVATE
 	"${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
 
@@ -35,31 +35,31 @@ message(STATUS ${GTEST_LIBRARY})
 
 # Add googletest to the include directories for the test target
 target_include_directories(
-    list_test PRIVATE
+    test_cont PRIVATE
     ${GTEST_INCLUDE_DIRS}
 )
 
 # Link test target against gtest libraries
 target_link_libraries(
-    list_test PRIVATE
+    test_cont PRIVATE
     ${GTEST_LIBRARY}
 )
 
 set_target_properties(containers PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON)
-set_target_properties(list_test PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON)
+set_target_properties(test_cont PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON)
 
 target_compile_options(containers PRIVATE
     -Wall
     -Wextra
     -pedantic
     -Werror
-    # -fsanitize=address # only for debug and test builds!
+    -fsanitize=address # only for debug and test builds!
 )
-# target_link_options(containers PRIVATE
-#     -fsanitize=address
-# )
+target_link_options(containers PRIVATE
+    -fsanitize=address
+)
 
-target_compile_options(list_test PRIVATE
+target_compile_options(test_cont PRIVATE
     -Wall
     -Wextra
     -pedantic

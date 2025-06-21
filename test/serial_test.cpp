@@ -1,22 +1,22 @@
 #include <gtest/gtest.h>
 
-#include "list-type_container.hpp"
+#include "serial_container.hpp"
 
-TEST(List, Creation) {  // создание контейнера DISABLED_
+TEST(Serial, Creation) {  // создание контейнера DISABLED_
 	// Arrange
-	ListTypeContainer::MyListTypeContainer<int>* plist{nullptr};
+	SerialContainer::MySerialContainer<int>* pSer{nullptr};
 
 	// Act (Creation for this test)
-	plist = new ListTypeContainer::MyListTypeContainer<int>();
+	pSer = new SerialContainer::MySerialContainer<int>();
 
 	// Assert
-	ASSERT_NE(plist, nullptr);
-	ASSERT_TRUE(plist->empty());
+	ASSERT_NE(pSer, nullptr);
+	ASSERT_TRUE(pSer->empty());
 }
 
-TEST(List, Empty) {  // контейнер пуст
+TEST(Serial, Empty) {  // контейнер пуст
 	// Arrange
-	ListTypeContainer::MyListTypeContainer<int> list;
+	SerialContainer::MySerialContainer<int> list;
 
 	// Act (empty for this test)
 
@@ -25,10 +25,10 @@ TEST(List, Empty) {  // контейнер пуст
 	ASSERT_TRUE(list.empty());
 }
 
-TEST(List, PushBack) {  // вставка элементов в конец
+TEST(Serial, PushBack) {  // вставка элементов в конец
 	// Arrange
 	const size_t count = 10;
-	ListTypeContainer::MyListTypeContainer<int> list;
+	SerialContainer::MySerialContainer<int> list;
 
 	// Act
 	for (size_t i = 0; i < count; ++i) {
@@ -40,10 +40,10 @@ TEST(List, PushBack) {  // вставка элементов в конец
 	ASSERT_FALSE(list.empty());
 }
 
-TEST(List, PushFront) {  // вставка элементов в начало
+TEST(Serial, PushFront) {  // вставка элементов в начало
 	// Arrange
 	const size_t count = 10;
-	ListTypeContainer::MyListTypeContainer<int> list;
+	SerialContainer::MySerialContainer<int> list;
 
 	// Act
 	for (size_t i = 0; i < count; ++i) {
@@ -55,14 +55,14 @@ TEST(List, PushFront) {  // вставка элементов в начало
 	ASSERT_FALSE(list.empty());
 }
 
-TEST(List, Insert) {  // вставка элементов в середину
+TEST(Serial, Insert) {  // вставка элементов в середину
 	// Arrange
 	const size_t expectedSize = 6;
 	const size_t count = 4;
 	bool result{false};
 	int testArray[count] = {0, 1, 4, 5};
 	int expectedArray[expectedSize] = {0, 1, 2, 3, 4, 5};
-	ListTypeContainer::MyListTypeContainer<int> list;
+	SerialContainer::MySerialContainer<int> list;
 	for (size_t i = 0; i < count; ++i) {
 		list.push_back(testArray[i]);
 	}
@@ -79,10 +79,10 @@ TEST(List, Insert) {  // вставка элементов в середину
 	ASSERT_EQ(list.size(), expectedSize);
 }
 
-TEST(List, PopBack) {    // удаление элементов из конца
+TEST(Serial, PopBack) {    // удаление элементов из конца
     // Arrange 
     const size_t count = 10;
-    ListTypeContainer::MyListTypeContainer<int> list;
+    SerialContainer::MySerialContainer<int> list;
 
     for (size_t i = 0; i < count; ++i) {
         list.push_back(i);
@@ -98,10 +98,10 @@ TEST(List, PopBack) {    // удаление элементов из конца
     ASSERT_TRUE(list.empty());
 }
 
-TEST(List, PopFront) { // удаление элементов из начала
+TEST(Serial, PopFront) { // удаление элементов из начала
     // Arrange
     const size_t count = 10;
-    ListTypeContainer::MyListTypeContainer<size_t> list;
+    SerialContainer::MySerialContainer<size_t> list;
 
     for (size_t i = 0; i < count; ++i) {
         list.push_front(i); // push_back
@@ -117,14 +117,14 @@ TEST(List, PopFront) { // удаление элементов из начала
     ASSERT_TRUE(list.empty());
 }
 
-TEST(List, Erase) {  // удаление элементов из середины
+TEST(Serial, Erase) {  // удаление элементов из середины
 	// Arrange
 	const size_t expectedSize = 4;
 	const size_t count = 10;
 	bool result{false};
 	int testArray[count] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 	int expectedArray[expectedSize] = {0, 1, 8, 9};
-	ListTypeContainer::MyListTypeContainer<int> list;
+	SerialContainer::MySerialContainer<int> list;
 	for (size_t i = 0; i < count; ++i) {
 		list.push_back(testArray[i]);
 	}
@@ -140,14 +140,14 @@ TEST(List, Erase) {  // удаление элементов из середин�
 	ASSERT_EQ(list.size(), expectedSize);
 }
 
-TEST(List, Get) {  // получение элементов из контейнера
+TEST(Serial, Get) {  // получение элементов из контейнера
 	// Arrange
 	const size_t expectedSize = 10;
 	const size_t count = 10;
 	int testArray[count] = {0, 0, 0, 0, 0, 10, 0, 0, 0, 0};
     size_t testIndex{5};
 	int expectedValue{10};
-	ListTypeContainer::MyListTypeContainer<int> list;
+	SerialContainer::MySerialContainer<int> list;
 	for (size_t i = 0; i < count; ++i) {
 		list.push_back(testArray[i]);
 	}
@@ -160,13 +160,13 @@ TEST(List, Get) {  // получение элементов из контейн�
 	ASSERT_EQ(list.size(), expectedSize);
 }
 
-TEST(List, GetSize) {  // получение размера контейнера (фактическое количество элементов)
+TEST(Serial, GetSize) {  // получение размера контейнера (фактическое количество элементов)
 	// Arrange
 	const size_t expectedSize = 10;
 	const size_t count = 10;
 	int testArray[count] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     size_t getSize{0};
-	ListTypeContainer::MyListTypeContainer<int> list;
+	SerialContainer::MySerialContainer<int> list;
 	for (size_t i = 0; i < count; ++i) {
 		list.push_back(testArray[i]);
 	}
@@ -179,9 +179,4 @@ TEST(List, GetSize) {  // получение размера контейнера
     // Assert
 	ASSERT_EQ(getSize, expectedSize);
 	ASSERT_EQ(list.size(), expectedSize);
-}
-
-int main(int argc, char** argv) {
-	testing::InitGoogleTest(&argc, argv);
-	return RUN_ALL_TESTS();
 }
